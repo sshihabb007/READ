@@ -1,0 +1,17 @@
+{
+  "name": "playwright-qa",
+  "displayName": "Playwright E2E & Trace Capture",
+  "version": "1.0.0",
+  "description": "Local Playwright MCP server (@playwright/mcp) configured against Google Chrome for automated E2E browser testing, accessibility snapshots, and trace/HAR capture for REA.",
+  "logo": "assets/logo.svg",
+  "suggestedPrompts": [
+    "Launch Playwright MCP to run an E2E browser flow and verify console/network health",
+    "Capture a live web interaction trace with Playwright and inspect it with REA",
+    "Verify responsive layout and accessibility snapshots across desktop and mobile viewports"
+  ],
+  "author": {
+    "name": "Microsoft Playwright MCP (Local Fast-Boot Bundle)",
+    "url": "https://github.com/microsoft/playwright-mcp"
+  },
+  "repository": "https://github.com/microsoft/playwright-mcp"
+}

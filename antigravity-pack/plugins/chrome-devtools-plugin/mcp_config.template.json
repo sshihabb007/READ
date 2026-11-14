@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "chrome-devtools": {
+      "command": "{{NODE_EXE}}",
+      "args": [
+        "{{CHROME_DEVTOOLS_CLI}}",
+        "--channel",
+        "stable",
+        "--no-usage-statistics"
+      ]
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "rea-security-forensics",
+  "displayName": "REA Security & Binary Forensics",
+  "version": "1.0.0",
+  "description": "Companion reverse-engineering, binary/APK auditing, variant analysis, YARA authoring, and end-to-end REA forensic pipeline skills and security subagent.",
+  "logo": "assets/logo.svg",
+  "suggestedPrompts": [
+    "Run the REA end-to-end forensic-to-clean-room architecture pipeline on a target artifact",
+    "Perform differential security review and variant analysis across modified functions",
+    "Scan an Android APK or native binary with REA and audit for sharp edges and YARA indicators"
+  ],
+  "author": {
+    "name": "REA Companion Pack (Trail of Bits + REA Workflows)",
+    "url": "https://github.com/trailofbits/skills"
+  },
+  "repository": "https://github.com/trailofbits/skills"
+}

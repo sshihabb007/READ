@@ -77,3 +77,14 @@ Thumbs.db
 website/_site/
 # Temporary translation output prepared before replacing the complete site.
 website/.i18n-*/
+
+# Standalone workspace projects (excluded from REA)
+/AIELTS/
+/DisplayInputSwitcher/
+/HTML TAILWINDCSS JS/
+/MISTER/
+/PortF/
+/ShihabMehediIDM/
+/VSPEED/
+/VideoSpeedController/
+/newPORT/

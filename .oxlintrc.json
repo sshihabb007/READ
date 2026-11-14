@@ -7,7 +7,12 @@
     "no-async-promise-executor": "error",
     "no-unreachable": "error",
     "no-unsafe-optional-chaining": "error",
-    "no-useless-escape": ["warn", { "allowRegexCharacters": ["-"] }],
+    "no-useless-escape": [
+      "warn",
+      {
+        "allowRegexCharacters": ["-"]
+      }
+    ],
     "complexity": ["warn", 20],
     "max-depth": ["warn", 4],
     "max-lines": [
@@ -81,7 +86,9 @@
     },
     {
       "files": ["src/domain/**/*.ts"],
-      "rules": { "rea/no-locale-compare": "error" }
+      "rules": {
+        "rea/no-locale-compare": "error"
+      }
     },
     {
       "files": [
@@ -89,7 +96,9 @@
         "src/domain/**/*.spec.ts",
         "src/domain/**/*.fixture.ts"
       ],
-      "rules": { "rea/no-locale-compare": "off" }
+      "rules": {
+        "rea/no-locale-compare": "off"
+      }
     },
     {
       "files": [
@@ -174,7 +183,9 @@
     },
     {
       "files": ["src/domain/javascript/javascriptSemanticTraversal.ts"],
-      "rules": { "rea/no-babel-visitor-keys": "off" }
+      "rules": {
+        "rea/no-babel-visitor-keys": "off"
+      }
     },
     {
       "files": ["src/application/**/*.test.ts"],
@@ -279,7 +290,8 @@
     ".codex",
     ".devin",
     ".factory",
-    "third_party"
+    "third_party",
+    "antigravity-pack"
   ],
   "options": {
     "reportUnusedDisableDirectives": "error"
