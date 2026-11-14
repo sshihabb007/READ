@@ -1,0 +1,16 @@
+{
+  "name": "architecture-studio",
+  "displayName": "System Architecture & Diagram Studio",
+  "version": "1.0.0",
+  "description": "EventStorming 5-phase system design, ADRs, interactive animated HTML data-flow diagrams, and collision-free layered HTML/SVG architecture topologies.",
+  "logo": "assets/logo.svg",
+  "suggestedPrompts": [
+    "Create a 5-phase EventStorming system design catalog from these requirements",
+    "Generate an interactive click-through HTML architecture diagram showing animated packet flows",
+    "Generate a collision-free layered HTML/SVG microservice and backend architecture diagram"
+  ],
+  "author": {
+    "name": "Architecture Studio (konraddzbik + CryoThrust + dwsy + Addy Osmani)"
+  },
+  "repository": "https://github.com/konraddzbik/architecture-diagram-skill"
+}

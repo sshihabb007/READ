@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "{{NODE_EXE}}",
+      "args": [
+        "{{PLAYWRIGHT_CLI}}",
+        "--browser",
+        "chrome",
+        "--caps",
+        "vision,pdf,devtools"
+      ]
+    }
+  }
+}

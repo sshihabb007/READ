@@ -1,0 +1,17 @@
+{
+  "name": "engineering-craft",
+  "displayName": "Full-Lifecycle Engineering & Performance",
+  "version": "1.0.0",
+  "description": "Curated Addy Osmani & Vercel Labs engineering skills (API design, incremental implementation, source/spec/constraint-driven dev, UI craft, React/Next & Core Web Vitals optimization, code simplification) plus Staff Reviewer, QA, and Web Perf subagents.",
+  "logo": "assets/logo.svg",
+  "suggestedPrompts": [
+    "Audit this web app or browser extension for Core Web Vitals and runtime bottlenecks",
+    "Review my recent changes with the staff-code-reviewer across correctness, security, and performance",
+    "Implement this feature incrementally using source-driven and constraint-driven development"
+  ],
+  "author": {
+    "name": "Addy Osmani & Vercel Labs (Curated for Antigravity)",
+    "url": "https://github.com/addyosmani/agent-skills"
+  },
+  "repository": "https://github.com/addyosmani/agent-skills"
+}

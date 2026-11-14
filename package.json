@@ -358,12 +358,13 @@
     "licenses:generate": "node scripts/generate-third-party-inventory.mjs",
     "licenses:check": "node scripts/generate-third-party-inventory.mjs --check",
     "lint:typed": "node scripts/ci/static-check-report.mjs typed-lint",
-    "knip:production": "node scripts/ci/production-reachability-report.mjs"
+    "knip:production": "node scripts/ci/production-reachability-report.mjs",
+    "setup:antigravity-pack": "node antigravity-pack/install.mjs"
   },
   "lint-staged": {
     "*.{cjs,cts,js,jsx,mjs,mts,ts,tsx}": [
-      "oxlint --fix",
-      "oxfmt"
+      "oxlint --fix --no-error-on-unmatched-pattern",
+      "oxfmt --no-error-on-unmatched-pattern"
     ],
     "*.{json,md,yml,yaml}": "oxfmt --no-error-on-unmatched-pattern"
   },
