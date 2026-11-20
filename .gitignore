@@ -80,11 +80,16 @@ website/.i18n-*/
 
 # Standalone workspace projects (excluded from REA)
 /AIELTS/
+/AIELTS2/
+/CLIPPER/
 /DisplayInputSwitcher/
+/Driver+/
 /HTML TAILWINDCSS JS/
 /MISTER/
 /PortF/
 /ShihabMehediIDM/
+/TV/
 /VSPEED/
 /VideoSpeedController/
 /newPORT/
+/shihabCV/
