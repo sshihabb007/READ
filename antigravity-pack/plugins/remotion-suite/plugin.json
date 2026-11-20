@@ -1,0 +1,18 @@
+{
+  "name": "remotion-suite",
+  "displayName": "Remotion Video & Motion Studio",
+  "version": "4.0.545",
+  "description": "Official Remotion Agent Skills suite (remotion-best-practices router plus markup, create, interactivity, studio, render, maps, captions, saas, multimedia, docs, license, and upgrade) for building, previewing, and rendering programmatic React videos.",
+  "logo": "assets/logo.svg",
+  "suggestedPrompts": [
+    "Create a new Remotion composition following remotion-markup and remotion-interactivity best practices",
+    "Add animated captions or MapLibre/CesiumJS map flyovers using remotion-captions and remotion-maps",
+    "Preview in Remotion Studio and render the composition to MP4 or OpenTimelineIO with remotion-render"
+  ],
+  "author": {
+    "name": "Remotion (@remotion/skills v4.0.545)",
+    "url": "https://www.remotion.dev"
+  },
+  "homepage": "https://www.remotion.dev/docs/ai/skills",
+  "repository": "https://github.com/remotion-dev/remotion"
+}

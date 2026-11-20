@@ -1,0 +1,17 @@
+{
+  "name": "replica-suite",
+  "displayName": "Replica App-Cloning & Parity Suite",
+  "version": "1.0.0",
+  "description": "Eleven clean-room app-cloning skills (recon, architect, design, build, backend, test, parity diff, review-driven entrepreneur, rebrand sweep, store launch, deploy) with 6 zero-dependency Python verification tools.",
+  "logo": "assets/logo.svg",
+  "suggestedPrompts": [
+    "Use replica-recon and replica-architect to map out and plan a clean-room clone of an app",
+    "Run replica-entrepreneur and replica-diff to find top user complaints and score feature parity",
+    "Use replica-brand and replica-deploy preflight tools to rebrand and verify launch readiness"
+  ],
+  "author": {
+    "name": "Jake Schincariol (Packaged for REA Antigravity Pack)",
+    "url": "https://opusjake.ai"
+  },
+  "repository": "https://github.com/Jakeschincariol/replica-skill"
+}

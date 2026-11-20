@@ -1,0 +1,15 @@
+"""Load a script from a skill folder under skills/ (the folder names have hyphens)."""
+
+import importlib.util
+import os
+
+PLUGIN_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.path.join(PLUGIN_ROOT, "skills")
+
+
+def load(folder, name):
+    path = os.path.join(ROOT, folder, name + ".py")
+    spec = importlib.util.spec_from_file_location("replica_" + name, path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod

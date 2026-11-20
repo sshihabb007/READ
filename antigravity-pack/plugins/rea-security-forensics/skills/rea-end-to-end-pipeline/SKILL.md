@@ -30,3 +30,9 @@ Use this playbook whenever turning **REA (`rea` MCP / CLI)** forensic findings i
 - **Reconstruction Parity**: Run REA's `evaluate_reconstruction_coverage`, `compare_static_and_observed_endpoints`, or `verify_reconstruction` when rebuilding an existing artifact.
 - **Live Browser & CWV Profiling**: Verify E2E flows with `playwright` MCP (`playwright-e2e-har`) and profile Core Web Vitals / CPU / memory with `chrome-devtools` MCP (`chrome-devtools-perf`).
 - **Security Sign-off**: Dispatch the `rea-security-auditor` subagent (and `differential-review` / `variant-analysis` / `sharp-edges`) before shipping.
+
+## Optional Product-Cloning & Launch Track (`replica-suite`)
+When the user wants a clean-room product clone or competitive standalone release (without copying proprietary assets or private endpoints):
+- **Clean-Room Recon & Matrix**: Pair `replica-recon` (`replica/recon.md`, `features.csv`) when mapping user-facing flows from public docs/user-owned workflows.
+- **Design System & Parity Scoring**: Use `replica-design` (`contrast.py`) for WCAG-verified tokens and `replica-diff` (`parity.py`, `imgdiff.py`) for layout-only + weighted feature parity scoring.
+- **Differentiation & Rebrand Launch**: Use `replica-entrepreneur` (`reviews.py` — verbatim linked reviews only), `replica-brand` (`sweep.py` to purge original identifiers/colors), `replica-launch` (`listing.py`), and `replica-deploy` preflight gates.

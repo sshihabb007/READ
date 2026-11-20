@@ -18,6 +18,8 @@ const planned = [
   `Deploy plugin: rea-security-forensics -> ${path.join(targetPluginsDir, "rea-security-forensics")}`,
   `Deploy plugin: architecture-studio -> ${path.join(targetPluginsDir, "architecture-studio")}`,
   `Deploy plugin: engineering-craft -> ${path.join(targetPluginsDir, "engineering-craft")}`,
+  `Deploy plugin: replica-suite -> ${path.join(targetPluginsDir, "replica-suite")}`,
+  `Deploy plugin: remotion-suite -> ${path.join(targetPluginsDir, "remotion-suite")}`,
   `Deploy plugin: playwright-qa -> ${path.join(targetPluginsDir, "playwright-qa")}`,
   `Deploy/wire plugin: chrome-devtools-plugin -> ${path.join(targetPluginsDir, "chrome-devtools-plugin")}`
 ];
@@ -69,17 +71,33 @@ const chromeDevtoolsCli = path.join(
   "chrome-devtools-mcp.js"
 );
 
+function syncPluginDirectory(srcDir, destDir) {
+  const copyFilter = (source) => path.basename(source) !== "__pycache__";
+  try {
+    fs.rmSync(destDir, { recursive: true, force: true, maxRetries: 3, retryDelay: 100 });
+    fs.cpSync(srcDir, destDir, { recursive: true, filter: copyFilter });
+  } catch (err) {
+    if (err && (err.code === "EPERM" || err.code === "EBUSY")) {
+      // Running IDEs/MCP hosts on Windows can hold open handles inside a plugin dir; update files in place.
+      fs.cpSync(srcDir, destDir, { recursive: true, force: true, filter: copyFilter });
+    } else {
+      throw err;
+    }
+  }
+}
+
 for (const pluginName of [
   "rea-security-forensics",
   "architecture-studio",
   "engineering-craft",
+  "replica-suite",
+  "remotion-suite",
   "playwright-qa",
   "chrome-devtools-plugin"
 ]) {
   const srcDir = path.join(packPluginsDir, pluginName);
   const destDir = path.join(targetPluginsDir, pluginName);
-  fs.rmSync(destDir, { recursive: true, force: true });
-  fs.cpSync(srcDir, destDir, { recursive: true });
+  syncPluginDirectory(srcDir, destDir);
 
   const templatePath = path.join(destDir, "mcp_config.template.json");
   if (fs.existsSync(templatePath)) {
