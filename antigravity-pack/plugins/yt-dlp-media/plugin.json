@@ -1,0 +1,16 @@
+{
+  "name": "yt-dlp-media",
+  "displayName": "yt-dlp Video, Audio & Subtitle Downloader",
+  "version": "1.0.0",
+  "description": "Download edit-ready H.264 MP4 video, audio tracks, time-range clips, metadata JSON, and native/auto subtitles from YouTube and 1000+ sites with yt-dlp (no API keys), paired with a safe shell-free Python helper.",
+  "logo": "assets/logo.svg",
+  "suggestedPrompts": [
+    "Fetch English subtitles or WAV audio from a YouTube URL using yt-dlp-media for Whisper transcription",
+    "Download an edit-ready 1080p H.264 MP4 clip from 00:05:00 to 00:07:30 using yt-dlp-media",
+    "Inspect available formats, duration, and metadata JSON of a video URL without downloading"
+  ],
+  "author": {
+    "name": "REA Enhanced Antigravity Pack",
+    "url": "https://github.com/sshihabb007/READ"
+  }
+}

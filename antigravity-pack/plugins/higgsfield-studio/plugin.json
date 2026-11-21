@@ -1,0 +1,18 @@
+{
+  "name": "higgsfield-studio",
+  "displayName": "Higgsfield Editorial Motion Graphics & MCP",
+  "version": "0.14.0",
+  "description": "Editorial Motion Graphics skill, official Higgsfield Streamable HTTP MCP server (https://mcp.higgsfield.ai/mcp), and all 9 official Higgsfield AI skills (faceless-video, generate, soul-id, product-photoshoot, brandkit, marketplace-cards, websites, youtube-thumbnail, video-explainer).",
+  "logo": "assets/logo.svg",
+  "suggestedPrompts": [
+    "Create a Vox-style editorial motion graphics explainer video via editorial-motion-graphics and Higgsfield MCP",
+    "Produce a narrated faceless documentary video with consistent visual style using higgsfield-faceless-video",
+    "Design a YouTube thumbnail and visual brandkit using higgsfield-youtube-thumbnail and higgsfield-brandkit"
+  ],
+  "author": {
+    "name": "Higgsfield AI (Packaged for REA Antigravity Pack)",
+    "url": "https://higgsfield.ai"
+  },
+  "homepage": "https://higgsfield.ai",
+  "repository": "https://github.com/higgsfield-ai/skills"
+}

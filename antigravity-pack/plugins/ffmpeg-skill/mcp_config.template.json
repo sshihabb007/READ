@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "ffmpeg-skill": {
+      "command": "{{PYTHON_EXE}}",
+      "args": [
+        "{{FFMPEG_SKILL_MCP_SERVER}}"
+      ]
+    }
+  }
+}

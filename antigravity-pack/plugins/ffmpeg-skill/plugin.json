@@ -1,0 +1,18 @@
+{
+  "name": "ffmpeg-skill",
+  "displayName": "FFmpeg Local Video & Audio Editor",
+  "version": "4.3.6",
+  "description": "Local FFmpeg video and audio editor for coding agents: 42 zero-dependency Python tools with a machine-readable contract, local stdio MCP server, probe-first / verify-last workflow, loudness normalization, silence removal, captions, HDR-to-SDR, and platform exports.",
+  "logo": "assets/logo.svg",
+  "suggestedPrompts": [
+    "Probe this video and cut out pauses with ffmpeg-skill before reframing to 9:16",
+    "Burn karaoke captions, normalize loudness to -14 LUFS, and verify YouTube Shorts compliance",
+    "Sync external microphone audio with drift correction and export a clean delivery master"
+  ],
+  "author": {
+    "name": "kajisho5 (Packaged for REA Antigravity Pack)",
+    "url": "https://github.com/kajisho5/ffmpeg-skill"
+  },
+  "homepage": "https://github.com/kajisho5/ffmpeg-skill",
+  "repository": "https://github.com/kajisho5/ffmpeg-skill"
+}

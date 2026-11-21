@@ -1,0 +1,16 @@
+{
+  "name": "whisper-captions",
+  "displayName": "Whisper Auto Captions & Transcription",
+  "version": "1.0.0",
+  "description": "Local Whisper / faster-whisper / WhisperX auto-captions and word-level transcription skill with a zero-dependency Python formatter exporting SRT, WebVTT, Remotion-native captions JSON, and viral 9:16 ASS karaoke/pop subtitles.",
+  "logo": "assets/logo.svg",
+  "suggestedPrompts": [
+    "Check installed Whisper backends and transcribe this video to word-level SRT and viral 9:16 ASS captions",
+    "Generate Remotion-compatible captions JSON from this audio clip using whisper-captions",
+    "Convert an existing word-timestamp JSON into vertical karaoke subtitles and burn them with FFmpeg"
+  ],
+  "author": {
+    "name": "REA Enhanced Antigravity Pack",
+    "url": "https://github.com/sshihabb007/READ"
+  }
+}

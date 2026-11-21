@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "higgsfield-mcp": {
+      "serverUrl": "https://mcp.higgsfield.ai/mcp"
+    }
+  }
+}

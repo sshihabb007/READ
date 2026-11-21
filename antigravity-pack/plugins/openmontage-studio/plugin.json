@@ -1,0 +1,18 @@
+{
+  "name": "openmontage-studio",
+  "displayName": "OpenMontage Agentic Video Studio",
+  "version": "1.0.0",
+  "description": "Open-source agentic video production system (AGPL-3.0) with 12 YAML production pipelines, 150+ Layer-2 director & creative skills, 100+ scored Python tools, Backlot living storyboard, Ink Theater doodle engine, Remotion composer, and reference-video 5-aspect analyst.",
+  "logo": "assets/logo.svg",
+  "suggestedPrompts": [
+    "Run OpenMontage preflight and produce a 60-second animated explainer with checkpoints",
+    "Analyze a reference Short or Reel with openmontage-reference-analyst and pitch 3 original concepts",
+    "Build a zero-API-key documentary montage from open archives using OpenMontage"
+  ],
+  "author": {
+    "name": "OpenMontageInc (Packaged for REA Antigravity Pack — AGPL-3.0)",
+    "url": "https://openmontage.video"
+  },
+  "homepage": "https://openmontage.video",
+  "repository": "https://github.com/OpenMontageInc/OpenMontage"
+}

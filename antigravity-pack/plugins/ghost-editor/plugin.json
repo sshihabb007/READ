@@ -1,0 +1,18 @@
+{
+  "name": "ghost-editor",
+  "displayName": "Ghost Editor (Talking-Head Reel Studio)",
+  "version": "0.3.0",
+  "description": "Open-source talking-head AI video editor turning raw phone recordings (retakes, pauses, false starts) into finished 1080x1920 vertical reels with 19 named visual style recipes, face-aware captions, SFX mixing, B-roll QA, and approval sheets.",
+  "logo": "assets/logo.svg",
+  "suggestedPrompts": [
+    "Edit this raw talking-head recording into a 1080x1920 Clean OS reel using ghost-editor",
+    "Pick the best takes, remove pauses, and build a Face RESULT or Whiteboard reel",
+    "Study a reference reel edit and generate an approval sheet before final render"
+  ],
+  "author": {
+    "name": "kurbaitaev (Packaged for REA Antigravity Pack)",
+    "url": "https://github.com/kurbaitaev/ghost-editor"
+  },
+  "homepage": "https://github.com/kurbaitaev/ghost-editor",
+  "repository": "https://github.com/kurbaitaev/ghost-editor"
+}

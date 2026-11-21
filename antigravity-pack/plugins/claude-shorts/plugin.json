@@ -1,0 +1,18 @@
+{
+  "name": "claude-shorts",
+  "displayName": "Claude Shorts (Longform-to-Shorts Pipeline)",
+  "version": "1.0.0",
+  "description": "Interactive 10-step longform-to-shortform video pipeline: faster-whisper word transcription, 5-dimension viral segment scoring, audio-aware boundary snapping, content-aware 9:16 reframing, Remotion animated captions (Bold/Bounce/Clean), and platform-specific YouTube Shorts / TikTok / Reels export.",
+  "logo": "assets/logo.svg",
+  "suggestedPrompts": [
+    "Extract the top viral vertical clips from this long video using claude-shorts",
+    "Score transcript highlights, snap audio boundaries, and render Bold Remotion captions",
+    "Export validated 1080x1920 clips optimized for YouTube Shorts, TikTok, and Instagram Reels"
+  ],
+  "author": {
+    "name": "Daniel Agrici (Packaged for REA Antigravity Pack)",
+    "url": "https://github.com/AgriciDaniel/claude-shorts"
+  },
+  "homepage": "https://github.com/AgriciDaniel/claude-shorts",
+  "repository": "https://github.com/AgriciDaniel/claude-shorts"
+}
