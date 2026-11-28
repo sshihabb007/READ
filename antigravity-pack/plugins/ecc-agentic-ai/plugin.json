@@ -1,0 +1,19 @@
+{
+  "name": "ecc-agentic-ai",
+  "displayName": "ECC Agentic Harnesses, Evals & ML",
+  "version": "2.2.3",
+  "description": "On-demand agentic & AI pack from affaan-m/ecc (v2.2.3): 24 agentic/ML/planning/OSS subagents plus 115+ skills for autonomous loops, multi-model councils, GAN/eval harnesses, PyTorch/MLE, scientific literature DBs, OSINT, and deep research.",
+  "logo": "assets/logo.svg",
+  "suggestedPrompts": [
+    "Design an agent evaluation harness and benchmark optimization loop",
+    "Run a multi-model council review or deep scientific literature investigation",
+    "Audit an ML/PyTorch or RAG pipeline with mle-reviewer and rag-pipeline-reviewer"
+  ],
+  "author": {
+    "name": "Affaan Mustafa (Curated for Antigravity)",
+    "url": "https://github.com/affaan-m/ecc"
+  },
+  "homepage": "https://ecc.tools",
+  "repository": "https://github.com/affaan-m/ecc",
+  "disabled": true
+}

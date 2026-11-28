@@ -1,0 +1,18 @@
+{
+  "name": "ecc-core",
+  "displayName": "ECC Core Engineering & Specialists",
+  "version": "2.2.3",
+  "description": "Curated active core from affaan-m/ecc (v2.2.3): 15 zero-overlap specialist subagents (build/DB/C#/PHP/Bengali/E2E/A11y/refactor/silent-failure) and 32 high-impact Database, Backend, Desktop, DevOps, Security, and Eval skills.",
+  "logo": "assets/logo.svg",
+  "suggestedPrompts": [
+    "Use the build-error-resolver or silent-failure-hunter subagent on my current changes",
+    "Review my PostgreSQL/MySQL schema and migrations with database-reviewer",
+    "Run an OWASP 2025 web perimeter audit or Windows desktop E2E verification"
+  ],
+  "author": {
+    "name": "Affaan Mustafa (Curated for Antigravity)",
+    "url": "https://github.com/affaan-m/ecc"
+  },
+  "homepage": "https://ecc.tools",
+  "repository": "https://github.com/affaan-m/ecc"
+}

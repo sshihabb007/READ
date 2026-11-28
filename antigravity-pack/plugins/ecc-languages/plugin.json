@@ -1,0 +1,19 @@
+{
+  "name": "ecc-languages",
+  "displayName": "ECC Polyglot Language & UI Packs",
+  "version": "2.2.3",
+  "description": "On-demand polyglot pack from affaan-m/ecc (v2.2.3): 26 language/framework reviewers & build resolvers plus 80+ skills for Go, Rust, C++, Java/Spring/Quarkus, Kotlin, Swift/Apple, Flutter/Dart, Vue/Nuxt/Angular, Rails, Perl, Godot, and UI motion.",
+  "logo": "assets/logo.svg",
+  "suggestedPrompts": [
+    "Review this Go, Rust, or C++ module with its dedicated ECC language reviewer",
+    "Build or audit a SwiftUI, Kotlin/Compose, or Flutter mobile feature using ECC patterns",
+    "Fix framework build failures using the matching ECC build-resolver subagent"
+  ],
+  "author": {
+    "name": "Affaan Mustafa (Curated for Antigravity)",
+    "url": "https://github.com/affaan-m/ecc"
+  },
+  "homepage": "https://ecc.tools",
+  "repository": "https://github.com/affaan-m/ecc",
+  "disabled": true
+}

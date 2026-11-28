@@ -10,7 +10,7 @@ This `enhanced` branch pairs **REA (`rea-agents`)** with a curated, zero-collisi
 # 1. Preview planned global Antigravity plugin & MCP runtime actions
 npm run setup:antigravity-pack -- --dry-run
 
-# 2. Install all 15 plugins & local/remote MCP runtimes into ~/.gemini/config/
+# 2. Install all 19 plugins & local/remote MCP runtimes into ~/.gemini/config/
 npm run setup:antigravity-pack
 
 # 3. Register REA MCP & skill with Antigravity (after building REA)
@@ -31,9 +31,13 @@ Also add the two companion Antigravity Marketplace plugins from the Antigravity 
 | **`rea-security-forensics`** | 13 | `rea-security-auditor` | — | MIT | Master `rea-end-to-end-pipeline` playbook + 12 Trail of Bits binary/APK/crypto/variant/YARA/static-analysis skills |
 | **`architecture-studio`** | 4 | `system-architect` | — | MIT | 5-phase EventStorming `system-design`, `interactive-architecture-diagram`, `layered-architecture-diagram`, and `documentation-and-adrs` |
 | **`engineering-craft`** | 20 | `staff-code-reviewer`, `qa-test-engineer`, `web-perf-auditor` | — | MIT | Curated Addy Osmani & Vercel Labs SDLC, API design, incremental dev, UI craft, React/Next & Core Web Vitals optimization skills (deduplicated against Superpowers) |
+| **`ecc-core`** | 32 | 15 specialists (`build-error-resolver`, `database-reviewer`, `refactor-cleaner`, `silent-failure-hunter`, `type-design-analyzer`, `pr-test-analyzer`, `e2e-runner`, `a11y-architect`, `doc-updater`, `spec-miner`, `code-explorer`, `commit-reviewer`, `csharp-reviewer`, `php-reviewer`, `bengali-reviewer`) | — | MIT | Active core from [`affaan-m/ecc`](https://github.com/affaan-m/ecc) (`v2.2.3`): zero-overlap engineering specialists plus Database, Backend, C#/.NET, PHP/Laravel, Python, Windows E2E, DevOps, OWASP 2025, Bengali NLP & Eval skills |
+| **`ecc-languages`** *(off by default)* | 80 | 26 language/framework reviewers & build resolvers | — | MIT | On-demand polyglot pack from `affaan-m/ecc` (`"disabled": true` until toggled on): Go, Rust, C++, Java/Spring/Quarkus, Kotlin, Swift/Apple, Flutter/Dart, Vue/Nuxt/Angular, Rails, Perl, F#, Godot & UI motion |
+| **`ecc-agentic-ai`** *(off by default)* | 118 | 24 agentic, ML, planning & OSS subagents | — | MIT | On-demand agentic & AI pack from `affaan-m/ecc` (`"disabled": true` until toggled on): autonomous loops, multi-model councils, GAN/eval harnesses, PyTorch/MLE, scientific literature DBs, OSINT & deep research |
+| **`ecc-ops-business`** *(off by default)* | 86 | 7 network, homelab, healthcare, SEO & marketing subagents | — | MIT | On-demand ops & domain pack from `affaan-m/ecc` (`"disabled": true` until toggled on): Cisco/VLAN/WireGuard, ClickHouse, DeFi/EVM security, HIPAA, supply chain, SEO, content, social & investor ops |
 | **`replica-suite`** | 11 | — | — | MIT | Clean-room app-cloning lifecycle (`replica-recon` -> `architect` -> `design` -> `build` -> `backend` -> `test` -> `diff` -> `entrepreneur` -> `brand` -> `launch` -> `deploy`) + 6 stdlib Python tools |
 | **`remotion-suite`** | 13 | — | — | MIT | Official `@remotion/skills` (`v4.0.545`): `remotion-best-practices` router plus `create`, `markup`, `interactivity`, `studio`, `render`, `maps`, `captions`, `multimedia`, `saas`, `docs`, `license`, and `upgrade` |
-| **`hyperframes`** | 9 | — | — | Apache-2.0 | Official **HyperFrames by HeyGen** (`v0.9.77`): HTML/CSS/GSAP deterministic motion graphics (`hyperframes`, `hyperframes-cli`, `hyperframes-registry`, `media-use`, `remotion-to-hyperframes`, `reverse-any-video`, `style-sampling`, `slideshow`, `figma`) |
+| **`hyperframes`** | 9 | — | — | Apache-2.0 | Official **HyperFrames by HeyGen** (`v0.9.104`): HTML/CSS/GSAP deterministic motion graphics (`hyperframes`, `hyperframes-cli`, `hyperframes-registry`, `media-use`, `remotion-to-hyperframes`, `reverse-any-video`, `style-sampling`, `slideshow`, `figma`) |
 | **`ghost-editor`** | 1 | — | — | MIT | Talking-head raw footage to finished `1080x1920` reels (`github.com/kurbaitaev/ghost-editor`): take selection, pause removal, face tracking, 19 named visual style recipes, approval sheets, and render QA |
 | **`ffmpeg-skill`** | 1 | — | `ffmpeg-skill` (local stdio Python) | MIT | Local FFmpeg video/audio editor (`github.com/kajisho5/ffmpeg-skill` v4.3.6): 42 zero-dependency stdlib Python tools, machine-readable contract, loudness, silence removal, captions, HDR-to-SDR, and platform checks |
 | **`whisper-captions`** | 1 | — | — | MIT | Local Whisper / `faster-whisper` / WhisperX auto-captions & transcription with bundled Python exporter for `.srt`, `.vtt`, Remotion `.captions.json`, and viral 9:16 `.ass` karaoke/pop subtitles |

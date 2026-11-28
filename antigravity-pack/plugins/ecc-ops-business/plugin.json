@@ -1,0 +1,19 @@
+{
+  "name": "ecc-ops-business",
+  "displayName": "ECC Ops, Networking, Domain & Growth",
+  "version": "2.2.3",
+  "description": "On-demand domain & operations pack from affaan-m/ecc (v2.2.3): 7 homelab, network, healthcare, SEO & marketing subagents plus 85+ skills for Cisco/VLAN/WireGuard, ClickHouse, DeFi/EVM security, HIPAA, supply chain, content, social, and investor ops.",
+  "logo": "assets/logo.svg",
+  "suggestedPrompts": [
+    "Audit homelab VLAN, WireGuard VPN, or Cisco IOS network configs with network-architect",
+    "Run a DeFi/AMM security or healthcare HIPAA/PHI compliance review",
+    "Plan an SEO, marketing campaign, or investor materials workflow"
+  ],
+  "author": {
+    "name": "Affaan Mustafa (Curated for Antigravity)",
+    "url": "https://github.com/affaan-m/ecc"
+  },
+  "homepage": "https://ecc.tools",
+  "repository": "https://github.com/affaan-m/ecc",
+  "disabled": true
+}

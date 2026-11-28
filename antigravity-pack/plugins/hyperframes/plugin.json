@@ -1,8 +1,8 @@
 {
   "name": "hyperframes",
   "displayName": "HyperFrames Motion Graphics Studio",
-  "version": "0.9.77",
-  "description": "Official HyperFrames by HeyGen (v0.9.77, Apache-2.0): write HTML/CSS/GSAP, render deterministic MP4 motion graphics. Includes 9 official skills (hyperframes, hyperframes-cli, hyperframes-registry, media-use, remotion-to-hyperframes, reverse-any-video, style-sampling, slideshow, figma).",
+  "version": "0.9.104",
+  "description": "Official HyperFrames by HeyGen (v0.9.104, Apache-2.0): write HTML/CSS/GSAP, render deterministic MP4 motion graphics. Includes 9 official skills (hyperframes, hyperframes-cli, hyperframes-registry, media-use, remotion-to-hyperframes, reverse-any-video, style-sampling, slideshow, figma).",
   "logo": "assets/logo.svg",
   "suggestedPrompts": [
     "Create a kinetic typography launch motion graphic in HyperFrames and verify with hyperframes check",

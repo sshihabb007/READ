@@ -1,6 +1,6 @@
-# HyperFrames Motion Graphics Studio (`hyperframes` v0.9.77)
+# HyperFrames Motion Graphics Studio (`hyperframes` v0.9.104)
 
-Official **HyperFrames by HeyGen** Agent Skills suite (`v0.9.77`, **Apache-2.0**) from [`heygen-com/hyperframes`](https://github.com/heygen-com/hyperframes) packaged for the REA Enhanced Antigravity Pack:
+Official **HyperFrames by HeyGen** Agent Skills suite (`v0.9.104`, **Apache-2.0**) from [`heygen-com/hyperframes`](https://github.com/heygen-com/hyperframes) packaged for the REA Enhanced Antigravity Pack:
 
 - **`hyperframes`** — Master HTML-to-video motion graphics router, deterministic frame-seeking render contract, and bundled CLI launcher (`scripts/plugin-cli.mjs`)
 - **`hyperframes-cli`** — Scaffolding, validation (`check`), snapshots, preview, rendering, and project history
