@@ -21,6 +21,7 @@ const PLUGIN_NAMES = [
   "ecc-languages",
   "ecc-agentic-ai",
   "ecc-ops-business",
+  "claude-code-setup",
   "replica-suite",
   "remotion-suite",
   "hyperframes",

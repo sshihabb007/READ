@@ -1,0 +1,18 @@
+{
+  "name": "claude-code-setup",
+  "displayName": "Claude Code Setup",
+  "version": "1.0.0",
+  "description": "Analyze codebases and recommend tailored Claude Code automations such as hooks, skills, MCP servers, plugins, and subagents.",
+  "logo": "assets/logo.svg",
+  "suggestedPrompts": [
+    "Recommend Claude Code automations for this codebase",
+    "Help me set up Claude Code hooks, skills, and MCP servers for this project",
+    "What hooks and subagents should I use for this repository?"
+  ],
+  "author": {
+    "name": "Anthropic",
+    "url": "https://github.com/anthropics/claude-plugins-official"
+  },
+  "homepage": "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/claude-code-setup",
+  "repository": "https://github.com/anthropics/claude-plugins-official"
+}

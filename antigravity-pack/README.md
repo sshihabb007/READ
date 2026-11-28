@@ -10,7 +10,7 @@ This `enhanced` branch pairs **REA (`rea-agents`)** with a curated, zero-collisi
 # 1. Preview planned global Antigravity plugin & MCP runtime actions
 npm run setup:antigravity-pack -- --dry-run
 
-# 2. Install all 19 plugins & local/remote MCP runtimes into ~/.gemini/config/
+# 2. Install all 20 plugins & local/remote MCP runtimes into ~/.gemini/config/
 npm run setup:antigravity-pack
 
 # 3. Register REA MCP & skill with Antigravity (after building REA)
@@ -35,6 +35,7 @@ Also add the two companion Antigravity Marketplace plugins from the Antigravity 
 | **`ecc-languages`** *(off by default)* | 80 | 26 language/framework reviewers & build resolvers | — | MIT | On-demand polyglot pack from `affaan-m/ecc` (`"disabled": true` until toggled on): Go, Rust, C++, Java/Spring/Quarkus, Kotlin, Swift/Apple, Flutter/Dart, Vue/Nuxt/Angular, Rails, Perl, F#, Godot & UI motion |
 | **`ecc-agentic-ai`** *(off by default)* | 118 | 24 agentic, ML, planning & OSS subagents | — | MIT | On-demand agentic & AI pack from `affaan-m/ecc` (`"disabled": true` until toggled on): autonomous loops, multi-model councils, GAN/eval harnesses, PyTorch/MLE, scientific literature DBs, OSINT & deep research |
 | **`ecc-ops-business`** *(off by default)* | 86 | 7 network, homelab, healthcare, SEO & marketing subagents | — | MIT | On-demand ops & domain pack from `affaan-m/ecc` (`"disabled": true` until toggled on): Cisco/VLAN/WireGuard, ClickHouse, DeFi/EVM security, HIPAA, supply chain, SEO, content, social & investor ops |
+| **`claude-code-setup`** | 1 | — | — | Apache-2.0 | Official Anthropic `claude-automation-recommender` (`anthropics/claude-plugins-official` v1.0.0): read-only codebase analyzer recommending tailored hooks, subagents, skills, plugins, and MCP servers |
 | **`replica-suite`** | 11 | — | — | MIT | Clean-room app-cloning lifecycle (`replica-recon` -> `architect` -> `design` -> `build` -> `backend` -> `test` -> `diff` -> `entrepreneur` -> `brand` -> `launch` -> `deploy`) + 6 stdlib Python tools |
 | **`remotion-suite`** | 13 | — | — | MIT | Official `@remotion/skills` (`v4.0.545`): `remotion-best-practices` router plus `create`, `markup`, `interactivity`, `studio`, `render`, `maps`, `captions`, `multimedia`, `saas`, `docs`, `license`, and `upgrade` |
 | **`hyperframes`** | 9 | — | — | Apache-2.0 | Official **HyperFrames by HeyGen** (`v0.9.104`): HTML/CSS/GSAP deterministic motion graphics (`hyperframes`, `hyperframes-cli`, `hyperframes-registry`, `media-use`, `remotion-to-hyperframes`, `reverse-any-video`, `style-sampling`, `slideshow`, `figma`) |
