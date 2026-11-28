@@ -3,11 +3,18 @@ import { createHash } from "node:crypto";
 import { describe, expect, it } from "vitest";
 
 import { compareBrowserScenarios } from "./browserScenarioDiff.js";
-import { networkContentCoverageReason } from "./browserScenarioDiffEvidence.js";
-import { scenarioNetworkCoverageReason } from "./browserScenarioNetworkComparison.js";
+import {
+  networkContentCoverageReason,
+  storageFingerprintCoverageReason,
+} from "./browserScenarioDiffEvidence.js";
+import {
+  SCENARIO_NETWORK_COVERAGE_GUIDANCE,
+  scenarioNetworkCoverageReason,
+} from "./browserScenarioNetworkComparison.js";
 import {
   compareBrowserScenariosInputSchema,
   browserScenarioDiffSchema,
+  type BrowserScenarioNormalizationRule,
 } from "./browserScenarioDiffValues.js";
 import {
   browserScenarioCaptureSchema,
@@ -564,73 +571,50 @@ describe("browser scenario network event order", () => {
     }
   });
 
-  it("keeps missing and cyclic redirect ancestry incomparable", () => {
-    for (const predecessor of ["missing", "middle-a", null]) {
-      const capture = redirectChainCapture();
-      const events = capture.events.items.map((event) =>
-        "transaction_id" in event && event.transaction_id === "root-a"
+  it("distinguishes cycles from unresolved or contradictory redirect predecessors", () => {
+    const capture = redirectChainCapture();
+    const { cycle, missingPredecessor } = SCENARIO_NETWORK_COVERAGE_GUIDANCE;
+
+    for (const [id, parent, state, phase, reason] of [
+      ["root-a", "missing", undefined, undefined, missingPredecessor],
+      ["root-a", null, "unknown", undefined, missingPredecessor],
+      ["root-a", "middle-a", undefined, undefined, cycle],
+      ["root-b", "root-a", undefined, "response", missingPredecessor],
+      ["middle-b", null, "root", "response", missingPredecessor],
+    ] as const) {
+      const items = capture.events.items.map((event) =>
+        "transaction_id" in event &&
+        event.transaction_id === id &&
+        (phase === undefined || event.kind === phase)
           ? {
               ...event,
-              redirected_from_transaction_id: predecessor,
-              redirected_from_transaction_state:
-                predecessor === null ? ("unknown" as const) : undefined,
+              redirected_from_transaction_id: parent,
+              redirected_from_transaction_state: state,
             }
           : event,
       );
-      const broken = browserScenarioCaptureSchema.parse({
-        ...capture,
-        events: { ...capture.events, items: events },
-      });
       const compared = compareBrowserScenarios(
         compareBrowserScenariosInputSchema.parse({
-          before_scenario: broken,
-          after_scenario: broken,
+          before_scenario: capture,
+          after_scenario: { ...capture, events: { ...capture.events, items } },
         }),
       );
       expect(compared.overall_status).toBe("unknown");
-      expect(
-        compared.steps.flatMap((step) => step.artifact_diffs),
-      ).toContainEqual(
-        expect.objectContaining({
-          artifact: "events",
-          status: "unknown",
-          reason: expect.stringContaining("Redirect"),
-        }),
+      const diff = compared.steps[0]?.artifact_diffs.find(
+        ({ artifact }) => artifact === "events",
       );
-    }
-  });
-
-  it("keeps contradictory phase ancestry unknown", () => {
-    const capture = concurrentCapture(["a", "b"], { a: 200, b: 404 });
-    const events = capture.events.items.map((event) =>
-      event.kind === "response" && event.transaction_id === "request-2"
-        ? {
-            ...event,
-            redirected_from_transaction_id: "request-1",
-            redirected_from_transaction_state: undefined,
-          }
-        : event,
-    );
-    const malformed = browserScenarioCaptureSchema.parse({
-      ...capture,
-      events: { ...capture.events, items: events },
-    });
-    const compared = compareBrowserScenarios(
-      compareBrowserScenariosInputSchema.parse({
-        before_scenario: malformed,
-        after_scenario: malformed,
-      }),
-    );
-    expect(compared.overall_status).toBe("unknown");
-    expect(
-      compared.steps.flatMap((step) => step.artifact_diffs),
-    ).toContainEqual(
-      expect.objectContaining({
-        artifact: "events",
+      if (diff === undefined)
+        throw new Error("Expected request-step comparison");
+      expect(diff).toMatchObject({
         status: "unknown",
-        reason: expect.stringContaining("Redirect predecessor"),
-      }),
-    );
+        before_state: "captured",
+        after_state: "captured",
+        before_sha256: expect.any(String),
+        after_sha256: expect.any(String),
+        reason,
+      });
+      expect(diff.before_sha256).not.toBe(diff.after_sha256);
+    }
   });
 });
 
@@ -1130,156 +1114,138 @@ const multiStepScenarioCapture = (
   });
 };
 
+const withStorage = (value: unknown) => {
+  const base = scenarioCapture({});
+  return browserScenarioCaptureSchema.parse({
+    ...base,
+    steps: base.steps.map((step) => ({
+      ...step,
+      artifacts: {
+        ...step.artifacts,
+        storage: { state: "captured", value },
+      },
+    })),
+  });
+};
+
+const emptyStorage = { cookies: [], local_storage: [], session_storage: [] };
+
 describe("storage fingerprint provenance", () => {
-  const withStorage = (value: unknown) => {
-    const base = scenarioCapture({});
-    return browserScenarioCaptureSchema.parse({
-      ...base,
-      steps: base.steps.map((step) => ({
-        ...step,
-        artifacts: {
-          ...step.artifacts,
-          storage: { state: "captured", value },
-        },
-      })),
-    });
-  };
-  const compare = (before: unknown, after: unknown) =>
+  const compare = (
+    before_scenario: BrowserScenarioCapture,
+    after_scenario: BrowserScenarioCapture,
+    rules: BrowserScenarioNormalizationRule[] = [],
+  ) =>
     compareBrowserScenarios(
       compareBrowserScenariosInputSchema.parse({
-        before_scenario: withStorage(before),
-        after_scenario: withStorage(after),
+        before_scenario,
+        after_scenario,
+        normalization: { rules },
       }),
     );
-  const empty = { cookies: [], local_storage: [], session_storage: [] };
-
-  it.each(["cookies", "local_storage", "session_storage"])(
-    "withholds legacy %s value identity on either side",
-    (kind) => {
-      const entry = {
-        name: "value",
-        value_state: "hashed",
-        value_sha256: "a".repeat(64),
-      };
-      const value = {
-        ...empty,
-        [kind]: [
-          kind === "cookies"
-            ? {
-                ...entry,
-                domain: "app.example.test",
-                path: "/",
-                secure: false,
-                http_only: false,
-                same_site: "Lax",
-              }
-            : entry,
-        ],
-      };
-      const current = { ...value, fingerprint_version: 2 };
-      for (const [before, after] of [
-        [value, value],
-        [value, current],
-        [current, value],
-      ]) {
-        const result = compare(before, after);
-        expect(result.overall_status).toBe("unknown");
-        expect(result.steps.flatMap((step) => step.artifact_diffs)).toEqual([
-          expect.objectContaining({
-            artifact: "storage",
-            status: "unknown",
-            reason: expect.stringContaining("Legacy storage fingerprints"),
-          }),
-          expect.objectContaining({
-            artifact: "storage",
-            status: "unknown",
-            reason: expect.stringContaining("Legacy storage fingerprints"),
-          }),
-        ]);
-      }
-      expect(compare(current, current).overall_status).toBe("unchanged");
-    },
-  );
-
-  it("conservatively withholds legacy comparisons even when digests differ", () => {
+  const current = (value: Readonly<Record<string, unknown>>) =>
+    withStorage({
+      ...value,
+      fingerprint_version: BROWSER_STORAGE_FINGERPRINT_VERSION,
+    });
+  const hashed = (kind: keyof typeof emptyStorage, hex = "a") => {
     const entry = {
       name: "value",
       value_state: "hashed",
-      value_sha256: "a".repeat(64),
+      value_sha256: hex.repeat(64),
     };
-    const left = { ...empty, local_storage: [entry] };
-    const right = {
-      ...empty,
-      local_storage: [{ ...entry, value_sha256: "b".repeat(64) }],
-    };
-    for (const [before, after] of [
-      [left, right],
-      [left, { ...right, fingerprint_version: 2 }],
-      [{ ...left, fingerprint_version: 2 }, right],
-    ])
-      expect(compare(before, after).overall_status).toBe("unknown");
-  });
-
-  it("checks legacy provenance before applying storage normalization", () => {
-    const legacy = {
-      ...empty,
-      local_storage: [
-        {
-          name: "value",
-          value_state: "hashed",
-          value_sha256: "a".repeat(64),
-        },
+    return {
+      ...emptyStorage,
+      [kind]: [
+        kind === "cookies"
+          ? {
+              ...entry,
+              domain: "app.example.test",
+              path: "/",
+              secure: false,
+              http_only: false,
+              same_site: "Lax",
+            }
+          : entry,
       ],
     };
-    const result = compareBrowserScenarios(
-      compareBrowserScenariosInputSchema.parse({
-        before_scenario: withStorage(legacy),
-        after_scenario: withStorage({ ...legacy, fingerprint_version: 2 }),
-        normalization: {
-          rules: [
-            {
-              rule_id: "rewrite-value-state",
-              artifacts: ["storage"],
-              match: "hashed",
-              replacement: "redacted-secret",
-            },
-          ],
-        },
-      }),
+  };
+  const expectLegacyDiff = (
+    before: BrowserScenarioCapture,
+    after: BrowserScenarioCapture,
+    equalDigests: boolean,
+    rules: BrowserScenarioNormalizationRule[] = [],
+  ) => {
+    const beforeStorage = before.steps[0]?.artifacts.storage;
+    const afterStorage = after.steps[0]?.artifacts.storage;
+    if (beforeStorage === undefined || afterStorage === undefined)
+      throw new Error("Expected storage fixtures");
+    const reason = storageFingerprintCoverageReason(
+      beforeStorage,
+      afterStorage,
     );
+    if (reason === undefined)
+      throw new Error("Expected legacy fingerprint guidance");
+    const result = compare(before, after, rules);
     expect(result.overall_status).toBe("unknown");
-    expect(result.steps.flatMap((step) => step.artifact_diffs)).toEqual([
-      expect.objectContaining({
+    const diffs = result.steps.flatMap(({ artifact_diffs }) => artifact_diffs);
+    expect(diffs).toHaveLength(2);
+    for (const diff of diffs) {
+      expect(diff).toMatchObject({
         artifact: "storage",
         status: "unknown",
-        reason: expect.stringContaining("Legacy storage fingerprints"),
-      }),
-      expect.objectContaining({
-        artifact: "storage",
-        status: "unknown",
-        reason: expect.stringContaining("Legacy storage fingerprints"),
-      }),
+        reason,
+        before_sha256: expect.any(String),
+        after_sha256: expect.any(String),
+      });
+      expect(diff.before_sha256 === diff.after_sha256).toBe(equalDigests);
+    }
+  };
+
+  it.each(["cookies", "local_storage", "session_storage"] as const)(
+    "withholds %s equality on either side while retaining the same captured digest",
+    (kind) => {
+      const value = hashed(kind);
+      const legacy = withStorage(value);
+      const versioned = current(value);
+      expectLegacyDiff(legacy, legacy, true);
+      expectLegacyDiff(legacy, versioned, true);
+      expectLegacyDiff(versioned, legacy, true);
+      expect(compare(versioned, versioned).overall_status).toBe("unchanged");
+    },
+  );
+
+  it("withholds legacy identity despite different digests or normalized value states", () => {
+    const value = hashed("local_storage");
+    const changed = hashed("local_storage", "b");
+    const legacy = withStorage(value);
+    const versioned = current(value);
+    const differentLegacy = withStorage(changed);
+    expectLegacyDiff(legacy, differentLegacy, false);
+    expectLegacyDiff(legacy, current(changed), false);
+    expectLegacyDiff(versioned, differentLegacy, false);
+    expectLegacyDiff(legacy, versioned, true, [
+      {
+        rule_id: "rewrite-value-state",
+        artifacts: ["storage"],
+        match: "hashed",
+        replacement: "redacted-secret",
+      },
     ]);
   });
 
-  it.each([false, true])(
-    "does not turn encoding metadata alone into a storage change (redacted=%s)",
-    (redacted) => {
-      const entries = redacted
-        ? [
-            {
-              name: "secret",
-              value_state: "redacted-secret",
-              value_sha256: null,
-            },
-          ]
-        : [];
-      const legacy = { ...empty, local_storage: entries };
-      const current = { ...legacy, fingerprint_version: 2 };
-      expect(compare(legacy, current).overall_status).toBe("unchanged");
-      expect(compare(current, legacy).overall_status).toBe("unchanged");
-    },
-  );
+  it("ignores encoding metadata for empty and fully redacted inventories", () => {
+    for (const local_storage of [
+      [],
+      [{ name: "secret", value_state: "redacted-secret", value_sha256: null }],
+    ]) {
+      const value = { ...emptyStorage, local_storage };
+      const legacy = withStorage(value);
+      const versioned = current(value);
+      expect(compare(legacy, versioned).overall_status).toBe("unchanged");
+      expect(compare(versioned, legacy).overall_status).toBe("unchanged");
+    }
+  });
 });
 
 interface ScenarioCaptureOptions {
@@ -1398,7 +1364,6 @@ const storageScenarioCapture = (
   family: "cookies" | "local_storage" | "session_storage",
   entries: readonly { name: string; value_sha256: string }[],
 ): BrowserScenarioCapture => {
-  const capture = scenarioCapture({});
   const values = entries.map((entry) => ({
     ...(family === "cookies"
       ? {
@@ -1412,24 +1377,10 @@ const storageScenarioCapture = (
     ...entry,
     value_state: "hashed",
   }));
-  return browserScenarioCaptureSchema.parse({
-    ...capture,
-    steps: capture.steps.map((step) => ({
-      ...step,
-      artifacts: {
-        ...step.artifacts,
-        storage: {
-          state: "captured",
-          value: {
-            fingerprint_version: BROWSER_STORAGE_FINGERPRINT_VERSION,
-            cookies: [],
-            local_storage: [],
-            session_storage: [],
-            [family]: values,
-          },
-        },
-      },
-    })),
+  return withStorage({
+    ...emptyStorage,
+    fingerprint_version: BROWSER_STORAGE_FINGERPRINT_VERSION,
+    [family]: values,
   });
 };
 
@@ -1443,35 +1394,33 @@ it.each(["cookies", "local_storage", "session_storage"] as const)(
     const before = storageScenarioCapture(family, entries);
     const after = storageScenarioCapture(family, entries.toReversed());
     const retained = structuredClone(after);
-    const compare = (right: BrowserScenarioCapture) =>
+    const compare = (
+      right: BrowserScenarioCapture,
+      rules: BrowserScenarioNormalizationRule[] = [],
+    ) =>
       compareBrowserScenarios(
         compareBrowserScenariosInputSchema.parse({
           before_scenario: before,
           after_scenario: right,
+          normalization: { rules },
         }),
       );
-    expect(compare(after).overall_status).toBe("unchanged");
-    expect(compare(after).normalization.built_in_rules).toContain(
+    const ordered = compare(after);
+    expect(ordered.overall_status).toBe("unchanged");
+    expect(ordered.normalization.built_in_rules).toContain(
       "compare_storage_entries_as_unordered_collection",
     );
-    expect(after).toEqual(retained);
-    const normalized = compareBrowserScenarios(
-      compareBrowserScenariosInputSchema.parse({
-        before_scenario: before,
-        after_scenario: after,
-        normalization: {
-          rules: [
-            {
-              rule_id: "names",
-              artifacts: ["storage"],
-              match: "theme",
-              replacement: "locale",
-            },
-          ],
+    expect(
+      compare(after, [
+        {
+          rule_id: "names",
+          artifacts: ["storage"],
+          match: "theme",
+          replacement: "locale",
         },
-      }),
-    );
-    expect(normalized.overall_status).toBe("unchanged");
+      ]).overall_status,
+    ).toBe("unchanged");
+    expect(after).toEqual(retained);
     for (const changed of [
       [{ ...entries[0], value_sha256: "c".repeat(64) }, entries[1]],
       [entries[0]],
